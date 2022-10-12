@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-blackjack/static/css/main.14241612.css",
+    "main.js": "/react-blackjack/static/js/main.008aceba.js",
+    "index.html": "/react-blackjack/index.html",
+    "main.14241612.css.map": "/react-blackjack/static/css/main.14241612.css.map",
+    "main.008aceba.js.map": "/react-blackjack/static/js/main.008aceba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14241612.css",
+    "static/js/main.008aceba.js"
+  ]
+}
