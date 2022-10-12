@@ -65,6 +65,22 @@ const diamondsMap = new Map([
   ["A", "🃁"],
 ]);
 
+const backCardMap = new Map([
+  [2, "🂠"],
+  [3, "🂠"],
+  [4, "🂠"],
+  [5, "🂠"],
+  [6, "🂠"],
+  [7, "🂠"],
+  [8, "🂠"],
+  [9, "🂠"],
+  [10, "🂠"],
+  ["J", "🂠"],
+  ["Q", "🂠"],
+  ["K", "🂠"],
+  ["A", "🂠"],
+]);
+
 const RedCard = styled.div`
   color: red;
   font-size: 11rem;
@@ -79,15 +95,24 @@ const BlackCard = styled.div`
   justify-content: center;
 `;
 
+const BackCard = styled.div`
+  color: grey;
+  font-size: 11rem;
+  display: flex;
+  justify-content: center;
+`;
+
 const Card = ({ suit, rank }) => {
-  if (suit == "♠") {
+  if (suit === "♠") {
     return <BlackCard>{spadesMap.get(rank)}</BlackCard>;
-  } else if (suit == "♣️") {
+  } else if (suit === "♣️") {
     return <BlackCard>{clubsMap.get(rank)}</BlackCard>;
-  } else if (suit == "♥") {
+  } else if (suit === "♥") {
     return <RedCard>{heartsMap.get(rank)}</RedCard>;
-  } else if (suit == "♦️") {
+  } else if (suit === "♦️") {
     return <RedCard>{diamondsMap.get(rank)}</RedCard>;
+  } else if (suit === null) {
+    return <BackCard>{backCardMap.get(rank)}</BackCard>;
   }
 };
 

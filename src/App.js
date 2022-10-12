@@ -308,7 +308,7 @@ class App extends React.Component {
               </div>
             ) : null}
             <p>{this.state.message}</p>
-            <p> Player Hand: </p>
+            <p> Player Hand ({this.state.player.count}): </p>
             <div
               style={{
                 display: "flex",
@@ -320,7 +320,10 @@ class App extends React.Component {
                 return <Card key={i} rank={card.rank} suit={card.suit} />;
               })}
             </div>
-            <p> Dealer Hand: </p>
+            <p>
+              Dealer Hand (
+              {!this.state.hideDealerCard ? this.state.dealer.count : null}):
+            </p>
             {this.state.hideDealerCard ? (
               <div
                 style={{

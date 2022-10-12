@@ -51,28 +51,13 @@ input {
   border-radius: 8px;
 }
 
-.redCard {
+.emptyCard {
   height: 150px;
-  width: 100px;
-  background-color: white;
+  width: 108px;
+  background-color: grey;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
 }
 
-.blackCard {
-  height: 150px;
-  width: 100px;
-  background-color: white;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-}
-
-tr {
-  justify-content: center;
-}
