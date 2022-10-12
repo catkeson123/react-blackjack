@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom/client";
+import React from "react";
 import "./App.css";
 import Card from "./DisplayCards";
 
@@ -16,6 +15,7 @@ class App extends React.Component {
       message: "",
       playerBet: "",
       playing: false,
+      hideDealerCard: true,
     };
   }
 
@@ -28,11 +28,11 @@ class App extends React.Component {
       for (let j = 0; j < suits.length; j++) {
         deck.push({ rank: ranks[i], suit: suits[j] });
       }
-      return deck;
     }
+    return deck;
   }
 
-  /* deal the initial cards to the player and dealer */
+  /* deal the initial cards to the player and dealer */ s;
   dealCards(deck) {
     const pCard1 = this.getCard(deck);
     const dCard1 = this.getCard(pCard1.gameDeck);
@@ -82,6 +82,7 @@ class App extends React.Component {
           gameOver: false,
           message: "",
           playing: true,
+          hideDealerCard: true,
         });
       } else {
         this.setState({ message: "You are out of chips! Start a new game" });
@@ -89,7 +90,6 @@ class App extends React.Component {
     } else {
       const deck = this.createDeck();
       const { gameDeck, player, dealer } = this.dealCards(deck);
-
       this.setState({
         deck: gameDeck,
         dealer,
@@ -100,6 +100,7 @@ class App extends React.Component {
         message: "",
         playerBet: "",
         playing: true,
+        hideDealerCard: true,
       });
     }
   }
@@ -118,11 +119,7 @@ class App extends React.Component {
     return allCards.reduce((total, card) => {
       if (card.rank === "A") {
         return total + 11 <= 21 ? total + 11 : total + 1;
-      } else if (
-        card.rank === "J" ||
-        card.rank === "Q" ||
-        card.number === "K"
-      ) {
+      } else if (card.rank === "J" || card.rank === "Q" || card.rank === "K") {
         return total + 10;
       } else {
         return total + card.rank;
@@ -137,12 +134,12 @@ class App extends React.Component {
         const { randomCard, gameDeck } = this.getCard(this.state.deck);
         const player = this.state.player;
 
-        this.state.player.cards.push(randomCard);
-        this.state.player.count = this.getCount(this.state.player.cards);
+        player.cards.push(randomCard);
+        player.count = this.getCount(player.cards);
 
         if (this.state.player.count > 21) {
           this.setState({
-            player: this.state.player,
+            player: player,
             gameOver: true,
             message: "You BUST!",
           });
@@ -158,9 +155,15 @@ class App extends React.Component {
   }
 
   /* handle player standing */
-  stand(dealer, deck) {
+  stand(deck) {
+    this.setState({
+      hideDealerCard: false,
+    });
+
     if (!this.state.gameOver) {
       // draw cards for dealer until their count is at least 17
+      const dealer = this.state.dealer;
+
       while (dealer.count < 17) {
         const { randomCard, gameDeck } = this.getCard(deck);
         dealer.cards.push(randomCard);
@@ -267,7 +270,7 @@ class App extends React.Component {
               </button>
               <button
                 onClick={() => {
-                  this.stand();
+                  this.stand(this.state.deck);
                 }}
               >
                 Stand
@@ -318,17 +321,33 @@ class App extends React.Component {
               })}
             </div>
             <p> Dealer Hand: </p>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              {this.state.dealer.cards.map((card, i) => {
-                return <Card key={i} rank={card.rank} suit={card.suit} />;
-              })}
-            </div>
+            {this.state.hideDealerCard ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <Card
+                  rank={this.state.dealer.cards[0].rank}
+                  suit={this.state.dealer.cards[0].suit}
+                />
+                <Card rank={this.state.dealer.cards[1].rank} suit={null} />
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                {this.state.dealer.cards.map((card, i) => {
+                  return <Card key={i} rank={card.rank} suit={card.suit} />;
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
