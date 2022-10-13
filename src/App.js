@@ -150,7 +150,7 @@ class App extends React.Component {
         this.setState({ message: "Please place your bet!" });
       }
     } else {
-      this.setState({ message: "Game over! Start a new game." });
+      this.setState({ message: "Game Over! Start a new game." });
     }
   }
 
@@ -261,6 +261,8 @@ class App extends React.Component {
               >
                 New Game
               </button>
+            </div>
+            <div className="buttons" length="100px">
               <button
                 onClick={() => {
                   this.hit();
@@ -283,6 +285,7 @@ class App extends React.Component {
                   <input
                     type="text"
                     name="bet"
+                    id="bet"
                     value={this.state.playerBet}
                     onChange={this.collectBet.bind(this)}
                   />
