@@ -247,7 +247,7 @@ class App extends React.Component {
         {!this.state.playing ? (
           <div className="startGame">
             <button
-              style={{ width: "100px", height: "50px", fontSize: 20 }}
+              style={{ width: "100px", height: "40px", fontSize: 16 }}
               onClick={() => {
                 this.startNewGame();
               }}
@@ -261,8 +261,8 @@ class App extends React.Component {
               <button
                 style={{
                   width: "100px",
-                  height: "50px",
-                  fontSize: 18,
+                  height: "40px",
+                  fontSize: 16,
                 }}
                 onClick={() => {
                   this.startNewGame();
@@ -272,7 +272,7 @@ class App extends React.Component {
               </button>
 
               <button
-                style={{ width: "100px", height: "50px", fontSize: 20 }}
+                style={{ width: "100px", height: "40px", fontSize: 16 }}
                 onClick={() => {
                   this.hit();
                 }}
@@ -281,7 +281,7 @@ class App extends React.Component {
               </button>
 
               <button
-                style={{ width: "100px", height: "50px", fontSize: 20 }}
+                style={{ width: "100px", height: "40px", fontSize: 16 }}
                 onClick={() => {
                   this.stand(this.state.deck);
                 }}
@@ -302,7 +302,7 @@ class App extends React.Component {
                   />
                 </form>
                 <button
-                  style={{ width: "100px", height: "50px", fontSize: 20 }}
+                  style={{ width: "100px", height: "40px", fontSize: 16 }}
                   onClick={() => {
                     this.placebet();
                   }}
@@ -316,8 +316,8 @@ class App extends React.Component {
                 <button
                   style={{
                     width: "100px",
-                    height: "50px",
-                    fontSize: 18,
+                    height: "40px",
+                    fontSize: 16,
                   }}
                   onClick={() => {
                     this.startNewGame("continue");

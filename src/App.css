@@ -9,20 +9,19 @@ button {
   border-radius: 8px;
   size: "lg";
 }
+.startGame {
+  display: flex;
+  justify-content: center;
+  color: red;
+  size: 100rem;
+}
 
 .buttons {
   display: flex;
   justify-content: center;
   color: red;
   width: "100px";
-  height: "25px"
-}
-
-.startGame {
-  display: flex;
-  justify-content: center;
-  color: red;
-  size: 100rem;
+  height: "20px"
 }
 
 form {
@@ -33,7 +32,7 @@ p {
   text-align: center;
   color: red;
   font-weight: 900;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 p.blackjack {
@@ -51,7 +50,7 @@ p.blackjack {
 
 input {
   width: 80%;
-  height: 68%;
+  height: 62%;
   border: 3px solid red;
   border-radius: 8px;
 }
