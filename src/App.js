@@ -150,60 +150,63 @@ class App extends React.Component {
         this.setState({ message: "Please place your bet!" });
       }
     } else {
-      this.setState({ message: "Game Over! Start a new game." });
+      this.setState({ message: "Game Over! Start a new game or continue." });
     }
   }
 
   /* handle player standing */
   stand(deck) {
-    this.setState({
-      hideDealerCard: false,
-    });
-
     if (!this.state.gameOver) {
-      // draw cards for dealer until their count is at least 17
-      const dealer = this.state.dealer;
-
-      while (dealer.count < 17) {
-        const { randomCard, gameDeck } = this.getCard(deck);
-        dealer.cards.push(randomCard);
-        dealer.count = this.getCount(dealer.cards);
-        deck = gameDeck;
-      }
-
-      if (dealer.count > 21) {
-        this.setState({
-          deck,
-          dealer,
-          chipCount: this.state.chipCount + this.state.bet * 2,
-          gameOver: true,
-          message: "Dealer bust! You Win!",
-        });
-      } else {
-        const winner = this.getWinner(this.state.dealer, this.state.player);
-        let chipCount = this.state.chipCount;
-        let message;
-
-        if (winner === "player") {
-          message = "You Win!";
-          chipCount += this.state.bet * 2;
-        } else if (winner === "dealer") {
-          message = "Dealer wins";
-        } else {
-          message = "Push";
-          chipCount += this.state.bet;
+      if (this.state.bet) {
+        // draw cards for dealer until their count is at least 17
+        const dealer = this.state.dealer;
+        while (dealer.count < 17) {
+          const { randomCard, gameDeck } = this.getCard(deck);
+          dealer.cards.push(randomCard);
+          dealer.count = this.getCount(dealer.cards);
+          deck = gameDeck;
         }
 
         this.setState({
-          deck,
-          dealer,
-          chipCount,
-          gameOver: true,
-          message,
+          hideDealerCard: false,
         });
+
+        if (dealer.count > 21) {
+          this.setState({
+            deck,
+            dealer,
+            chipCount: this.state.chipCount + this.state.bet * 2,
+            gameOver: true,
+            message: "Dealer bust! You Win!",
+          });
+        } else {
+          const winner = this.getWinner(this.state.dealer, this.state.player);
+          let chipCount = this.state.chipCount;
+          let message;
+
+          if (winner === "player") {
+            message = "You Win!";
+            chipCount += this.state.bet * 2;
+          } else if (winner === "dealer") {
+            message = "Dealer wins";
+          } else {
+            message = "Push";
+            chipCount += this.state.bet;
+          }
+
+          this.setState({
+            deck,
+            dealer,
+            chipCount,
+            gameOver: true,
+            message,
+          });
+        }
+      } else {
+        this.setState({ message: "Please place your bet!" });
       }
     } else {
-      this.setState({ message: "Game Over! Start a new game" });
+      this.setState({ message: "Game Over! Start a new game or continue." });
     }
   }
 
@@ -244,6 +247,7 @@ class App extends React.Component {
         {!this.state.playing ? (
           <div className="startGame">
             <button
+              style={{ width: "100px", height: "50px", fontSize: 20 }}
               onClick={() => {
                 this.startNewGame();
               }}
@@ -255,22 +259,29 @@ class App extends React.Component {
           <div>
             <div className="buttons">
               <button
+                style={{
+                  width: "100px",
+                  height: "50px",
+                  fontSize: 18,
+                }}
                 onClick={() => {
                   this.startNewGame();
                 }}
               >
                 New Game
               </button>
-            </div>
-            <div className="buttons" length="100px">
+
               <button
+                style={{ width: "100px", height: "50px", fontSize: 20 }}
                 onClick={() => {
                   this.hit();
                 }}
               >
                 Hit
               </button>
+
               <button
+                style={{ width: "100px", height: "50px", fontSize: 20 }}
                 onClick={() => {
                   this.stand(this.state.deck);
                 }}
@@ -291,6 +302,7 @@ class App extends React.Component {
                   />
                 </form>
                 <button
+                  style={{ width: "100px", height: "50px", fontSize: 20 }}
                   onClick={() => {
                     this.placebet();
                   }}
@@ -302,6 +314,11 @@ class App extends React.Component {
             {this.state.gameOver ? (
               <div className="buttons">
                 <button
+                  style={{
+                    width: "100px",
+                    height: "50px",
+                    fontSize: 18,
+                  }}
                   onClick={() => {
                     this.startNewGame("continue");
                   }}
@@ -311,49 +328,55 @@ class App extends React.Component {
               </div>
             ) : null}
             <p>{this.state.message}</p>
-            <p> Player Hand ({this.state.player.count}): </p>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              {this.state.player.cards.map((card, i) => {
-                return <Card key={i} rank={card.rank} suit={card.suit} />;
-              })}
-            </div>
-            <p>
-              Dealer Hand (
-              {!this.state.hideDealerCard ? this.state.dealer.count : null}):
-            </p>
-            {this.state.hideDealerCard ? (
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                }}
-              >
-                <Card
-                  rank={this.state.dealer.cards[0].rank}
-                  suit={this.state.dealer.cards[0].suit}
-                />
-                <Card rank={this.state.dealer.cards[1].rank} suit={null} />
+            {this.state.bet ? (
+              <div>
+                <p> Player Hand ({this.state.player.count}): </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                  }}
+                >
+                  {this.state.player.cards.map((card, i) => {
+                    return <Card key={i} rank={card.rank} suit={card.suit} />;
+                  })}
+                </div>
+                n
+                <p>
+                  Dealer Hand (
+                  {!this.state.hideDealerCard ? this.state.dealer.count : null}
+                  ):
+                </p>
+                {this.state.hideDealerCard ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Card
+                      rank={this.state.dealer.cards[0].rank}
+                      suit={this.state.dealer.cards[0].suit}
+                    />
+                    <Card rank={this.state.dealer.cards[1].rank} suit={null} />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {this.state.dealer.cards.map((card, i) => {
+                      return <Card key={i} rank={card.rank} suit={card.suit} />;
+                    })}
+                  </div>
+                )}
               </div>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                }}
-              >
-                {this.state.dealer.cards.map((card, i) => {
-                  return <Card key={i} rank={card.rank} suit={card.suit} />;
-                })}
-              </div>
-            )}
+            ) : null}
           </div>
         )}
       </div>
