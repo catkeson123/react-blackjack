@@ -85,7 +85,7 @@ class App extends React.Component {
           hideDealerCard: true,
         });
       } else {
-        this.setState({ message: "You are out of chips! Start a new game" });
+        this.setState({ message: "You are out of chips! Start a new game." });
       }
     } else {
       const deck = this.createDeck();
@@ -141,6 +141,7 @@ class App extends React.Component {
           this.setState({
             player: player,
             gameOver: true,
+            hideDealerCard: false,
             message: "You BUST!",
           });
         } else {
@@ -177,7 +178,7 @@ class App extends React.Component {
             dealer,
             chipCount: this.state.chipCount + this.state.bet * 2,
             gameOver: true,
-            message: "Dealer bust! You Win!",
+            message: "Dealer BUST! You Win!",
           });
         } else {
           const winner = this.getWinner(this.state.dealer, this.state.player);
@@ -188,9 +189,9 @@ class App extends React.Component {
             message = "You Win!";
             chipCount += this.state.bet * 2;
           } else if (winner === "dealer") {
-            message = "Dealer wins";
+            message = "Dealer wins!";
           } else {
-            message = "Push";
+            message = "Push!";
             chipCount += this.state.bet;
           }
 
@@ -220,7 +221,7 @@ class App extends React.Component {
       });
     } else {
       const chipCount = this.state.chipCount - bet;
-      this.setState({ chipCount, playerBet: "", bet });
+      this.setState({ chipCount, playerBet: "", bet, message: "" });
     }
   }
 

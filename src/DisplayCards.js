@@ -84,6 +84,7 @@ const backCardMap = new Map([
 const RedCard = styled.div`
   color: red;
   font-size: 11rem;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
 `;
@@ -91,6 +92,7 @@ const RedCard = styled.div`
 const BlackCard = styled.div`
   color: grey;
   font-size: 11rem;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
 `;
@@ -98,6 +100,7 @@ const BlackCard = styled.div`
 const BackCard = styled.div`
   color: grey;
   font-size: 11rem;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
 `;

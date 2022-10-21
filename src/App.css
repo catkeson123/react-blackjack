@@ -1,6 +1,6 @@
 body {
   background-image: url("images/blackjackbackground.jpeg");
-  font: 15px Arial, Helvetica, sans-serif;
+  font: 15px Impact, Haettenschweiler, Franklin Gothic Bold, Charcoal, Helvetica Inserat, Bitstream Vera Sans Bold, Arial Black, sans serif
 }
 
 button {
@@ -8,7 +8,9 @@ button {
   margin: 0px 10px 10px 10px; 
   border-radius: 8px;
   size: "lg";
+  font-family: Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif
 }
+
 .startGame {
   display: flex;
   justify-content: center;
@@ -33,6 +35,7 @@ p {
   color: red;
   font-weight: 900;
   font-size: 20px;
+  margin-bottom: 40px
 }
 
 p.blackjack {
